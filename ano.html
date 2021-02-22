@@ -9,6 +9,7 @@
 	<select onchange="chamarFuncao(this)" id="opcoes">
 		<option value="0">Escolha uma opção</option>
 		<option id="1" name="1" value="1">Cº > Fº</option>
+		<option id="2" name="2" value="2">Ano</option>
 	</select>
 
 	<div class="container" id="conteudo">
@@ -31,8 +32,10 @@
 				
 				div.innerHTML = '<h1> Calcular c para f </h1>'
             	div.innerHTML += '<input onkeyup="funcaoCal('+"'c'"+')" id="c" type="number" name="c" placeholder="insirir valor de c" ><input onkeyup="funcaoCal('+"'f'"+')" id="f" type="number" name="f" placeholder="insirir valor de f" >'
-            	
-            	// var k = eval(document.getElementById('c').value)
+			}
+			if (values == '2') {
+				div.innerHTML = '<h1> teste </h1>'
+				
 			}
 		}
 
