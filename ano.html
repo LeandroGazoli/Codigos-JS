@@ -6,9 +6,9 @@
 </head>
 <body>
 
-	<select onchange="teste(this)" id="opcoes">
+	<select onchange="chamarFuncao(this)" id="opcoes">
 		<option value="0">Escolha uma opção</option>
-		<option id="1" name="1" value="1">opção 1</option>
+		<option id="1" name="1" value="1">Cº > Fº</option>
 	</select>
 
 	<div class="container" id="conteudo">
@@ -16,10 +16,25 @@
 	</div>
 
 	<script>
+		function chamarFuncao (valor) {
+			console.log (funcaoCal)
+			var values = valor.value;  
+			console.log(values);
+			if (values = '1') {
+				var div = document.getElementById('conteudo')
+				div.innerHTML = '<h1> Calcular c para f </h1>'
+            	div.innerHTML += '<input onkeyup="funcaoCal('+"'c'"+')" id="c" type="number" name="c" placeholder="insirir valor de c" ><input onkeyup="funcaoCal('+"'f'"+')" id="f" type="number" name="f" placeholder="insirir valor de f" >'
+            	
+            	// var k = eval(document.getElementById('c').value)
+			}
+		}
 
-		var funcaoCal = function (tipo){
+		function funcaoCal(tipo){
 			if (tipo === 'c') {
 				var c = eval(document.getElementById('c').value)
+				console.log(c)
+				var t = eval(c.value)
+				console.log(t)
 				var soma = (c*9/5) + 32
 				document.getElementById('f').value = soma
 				console.log(soma)
@@ -30,10 +45,6 @@
 				var soma = (f-32) * 5/9
 				document.getElementById('c').value = soma
 			}
-		}
-
-		function chamarFuncao (value) {
-			
 		}
 
 		
