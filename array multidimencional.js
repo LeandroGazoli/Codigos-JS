@@ -1,0 +1,9 @@
+var listar = []
+listar ['teste'] = []
+listar ['teste'][0] = 'qualquercoisa'
+listar ['teste'][1] = 'tres'
+listar ['teste'][2] = 'quatro'
+listar ['teste2'] = []
+listar ['teste2'][0] = 'algumacoisa'
+listar ['teste2'][1] = 'chave'
+console.log(listar)
