@@ -16,12 +16,19 @@
 	</div>
 
 	<script>
+		var div = document.getElementById('conteudo')
+			div.innerHTML = '<p> Selecione uma opção </p>'	
 		function chamarFuncao (valor) {
 			console.log (funcaoCal)
 			var values = valor.value;  
 			console.log(values);
-			if (values = '1') {
-				var div = document.getElementById('conteudo')
+			var div = document.getElementById('conteudo')
+			div.innerHTML = '<p> Selecione uma opção </p>'	
+			if (values == '0') {
+				div.innerHTML = '<p> Selecione uma opção </p>'
+			}
+			if (values == '1') {
+				
 				div.innerHTML = '<h1> Calcular c para f </h1>'
             	div.innerHTML += '<input onkeyup="funcaoCal('+"'c'"+')" id="c" type="number" name="c" placeholder="insirir valor de c" ><input onkeyup="funcaoCal('+"'f'"+')" id="f" type="number" name="f" placeholder="insirir valor de f" >'
             	
