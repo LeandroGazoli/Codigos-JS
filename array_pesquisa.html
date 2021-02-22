@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<input onkeyup="buscarVeiculo('buscar_veiculo')" id="buscar_veiculo" type="text" name="buscar" placeholder="digite o veiculo que deseja buscar">
+	<p id="info"></p>
+<script>
+	var carros = []
+	carros[0] = 'uno'
+	carros[1] = 'gol'
+	carros[2] = 'santana'
+	carros[3] = 'fusca'
+
+	function buscarVeiculo (valor) {
+		var verifica_carro = document.getElementById('buscar_veiculo').value
+		var div = document.getElementById('info')
+		if (carros.indexOf(verifica_carro) >= 0) {
+			
+			div.innerHTML = verifica_carro + ' encontrado'
+		
+		} else {
+			div.innerHTML = verifica_carro + ' não encontrado'
+		} 
+		console.log (carros.indexOf(verifica_carro))
+	}
+
+	
+	
+	
+</script>
+</body>
+</html>
