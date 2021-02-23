@@ -103,14 +103,20 @@
 
 				var gjson
 				var gjsonbrl
+				gjsonbrl = getJSON('https://economia.awesomeapi.com.br/all/BRL-USD')
+				gparsebrl = []
+				gparsebrl = JSON.parse(gjsonbrl)
+				y = gparsebrl.BRL.ask
 				gjson = getJSON('https://economia.awesomeapi.com.br/all/USD-BRL')
 				gparse = []
 				gparse = JSON.parse(gjson)
 				x = gparse.USD.ask
 				console.log(x)
+				console.log(y)
+				console.log(gparsebrl)
 				
-				div.innerHTML = '<input type="number" value="'+x+'">'
-				div.innerHTML = '<input type="number" value="'+x+'">'
+				div.innerHTML = '<input type="number" id="x" value="'+x+'">'
+				div.innerHTML += '<input type="number" id="y" value="'+x+'">'
 
 			}
 		}
