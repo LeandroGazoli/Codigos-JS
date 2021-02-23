@@ -118,7 +118,7 @@
 				div.innerHTML = '<input onkeyup="dolarhoje(\'r\')" type="number" name="r" id="r" placeholder="digite o dolar">'
 				div.innerHTML += '<input onkeyup="dolarhoje(\'d\')" type="number" id="d" placeholder="digite o real">'
 				div.innerHTML += '<input style="display:none;" type="number" name="m" id="m" value="'+ y +'" placeholder="digite o real">'
-				div.innerHTML += '<input style="display:none;" type="number" name="n" id="m" value="'+ x +'" placeholder="digite o real">'
+				div.innerHTML += '<input style="display:none;" type="number" name="n" id="n" value="'+ x +'" placeholder="digite o real">'
 
 			}
 		}
@@ -138,10 +138,10 @@
 			if(tipo === 'd') {
 				var real = eval(document.getElementById('d'))
 				var n = eval(document.getElementById('n'))
-				var real1 = eval(real.value)
-				var soma = n*real
-				console.log(soma)
-				console.log(real)
+				var rm = eval(real.value)
+				var soma = n*rm
+				console.log('soma ' + soma)
+				console.log(rm)
 				document.getElementById('r').value = soma
 			}
 		}
