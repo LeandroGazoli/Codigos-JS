@@ -115,12 +115,26 @@
 				console.log(y)
 				console.log(gparsebrl)
 				
-				div.innerHTML = '<input type="number" id="x" value="'+x+'">'
-				div.innerHTML += '<input type="number" id="y" value="'+y+'">'
+				div.innerHTML = '<input onkeyup="dolarhoje(\'d\')" type="number" id="d" value="'+ x +'" placeholder="digite o dolar">'
+				div.innerHTML += '<input onkeyup="dolarhoje(\'y\')" type="number" id="r" value="'+ y +'" placeholder="digite o real">'
+				div.innerHTML += '<input style="display:none;" type="number" id="m" value="'+ y +'" placeholder="digite o real">'
 
 			}
 		}
 
+		function dolarhoje(tipo) {
+			
+			if (tipo === 'd') {
+				var d = eval(document.getElementById('d').value)
+				var r = eval(document.getElementById('r').value)
+				var m = eval(document.getElementById('m').value)
+				var dolar = eval(d.valor)
+				var real = eval(real.valor)
+				var soma = m*d
+				document.getElementById('r').value = soma
+				console.log(soma)
+			}
+		}
 
 		function funcaoCal(tipo){
 			if (tipo === 'c') {
