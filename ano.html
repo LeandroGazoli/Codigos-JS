@@ -101,15 +101,16 @@
 
 			if (values == '3') {
 
-				var gjson ;
-				gjson = getJSON('https://economia.awesomeapi.com.br/all/USD-BRL') ;
+				var gjson
+				var gjsonbrl
+				gjson = getJSON('https://economia.awesomeapi.com.br/all/USD-BRL')
 				gparse = []
 				gparse = JSON.parse(gjson)
 				x = gparse.USD.ask
 				console.log(x)
-				document.getElementById("conteudo").innerText = x
-
-				div.innerHTML = '<h3>' + x + '</h3>'
+				
+				div.innerHTML = '<input type="number" value="'+x+'">'
+				div.innerHTML = '<input type="number" value="'+x+'">'
 
 			}
 		}
