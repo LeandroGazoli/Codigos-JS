@@ -115,8 +115,8 @@
 				console.log(y)
 				console.log(gparsebrl)
 				
-				div.innerHTML = '<input onkeyup="dolarhoje(\'d\')" type="number" id="d" value="'+ x +'" placeholder="digite o dolar">'
-				div.innerHTML += '<input onkeyup="dolarhoje(\'y\')" type="number" id="r" value="'+ y +'" placeholder="digite o real">'
+				div.innerHTML = '<input onkeyup="dolarhoje(\'r\')" type="number" id="r" placeholder="digite o dolar">'
+				div.innerHTML += '<input onkeyup="dolarhoje(\'d\')" type="number" id="d" placeholder="digite o real">'
 				div.innerHTML += '<input style="display:none;" type="number" id="m" value="'+ y +'" placeholder="digite o real">'
 
 			}
@@ -124,13 +124,15 @@
 
 		function dolarhoje(tipo) {
 			
-			if (tipo === 'd') {
-				var d = eval(document.getElementById('d').value)
-				var r = eval(document.getElementById('r').value)
+			if (tipo === 'r') {
+				var dolar = eval(document.getElementById('r').value)
+				// var real = eval(document.getElementById('d').value)
 				var m = eval(document.getElementById('m').value)
-				var dolar = eval(d.valor)
-				var real = eval(real.valor)
-				var soma = m*d
+				var dolar1 = eval(dolar.valor)
+				console.log(dolar)
+				console.log(r)
+				var real = eval(r.valor)
+				var soma = r*dolar
 				document.getElementById('r').value = soma
 				console.log(soma)
 			}
