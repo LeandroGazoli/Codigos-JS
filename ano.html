@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title></title>
+	<script type="text/javascript" src="jquery.min.js"> </script>
 </head>
 <body>
 
@@ -18,24 +19,79 @@
 
 	<script>
 		var div = document.getElementById('conteudo')
-			div.innerHTML = '<p> Selecione uma opção </p>'	
+		div.innerHTML = '<p> Selecione uma opção </p>'	
+		
 		function chamarFuncao (valor) {
-			console.log (funcaoCal)
 			var values = valor.value;  
-			console.log(values);
 			var div = document.getElementById('conteudo')
 			div.innerHTML = '<p> Selecione uma opção </p>'	
+
+			//Escolher uma opção
 			if (values == '0') {
 				div.innerHTML = '<p> Selecione uma opção </p>'
+				var x = document.getElementById("mySelect");
+				if(x) {
+					var obj = document.getElementById("mySelect");
+					obj.remove();
+				}
 			}
+			//calcular temperatura
 			if (values == '1') {
 				
 				div.innerHTML = '<h1> Calcular c para f </h1>'
-            	div.innerHTML += '<input onkeyup="funcaoCal('+"'c'"+')" id="c" type="number" name="c" placeholder="insirir valor de c" ><input onkeyup="funcaoCal('+"'f'"+')" id="f" type="number" name="f" placeholder="insirir valor de f" >'
+				div.innerHTML += '<input onkeyup="funcaoCal(\'c\')" id="c" type="number" name="c" placeholder="insirir valor de c" ><input onkeyup="funcaoCal(\'f\')" id="f" type="number" name="f" placeholder="insirir valor de f" >'
+				var x = document.getElementById("mySelect");
+				if(x) {
+					var obj = document.getElementById("mySelect");
+					obj.remove();
+				}
 			}
 			if (values == '2') {
-				div.innerHTML = '<h1> teste </h1>'
-				
+				div.innerHTML = '<h1> Calcular ano </h1>'
+				var myParent = document.body;
+
+				//Create array of options to be added
+				var ano = [];
+				for (var z = 1950; z <= 2021; z++) {
+					x = z
+					if (x <= 2021) {
+						ano.push(x)
+					}
+				}
+
+				//Create and append select list
+				var selectList = document.createElement("select");
+				selectList.id = "mySelect";
+				selectList.className = "teste"
+				myParent.appendChild(selectList);
+				var option2 = document.createElement("option");
+				    option2.value = 0;
+				    option2.text = "selecione uma data";
+				    option2.id = 0;
+				    selectList.appendChild(option2);
+				//Create and append the options
+				for (var i = 0; i < ano.length; i++) {
+				    var option = document.createElement("option");
+				    option.value = ano[i];
+				    option.text = ano[i];
+				    option.id = ano[i];
+				    selectList.appendChild(option);
+				}
+
+				document.getElementById("mySelect").onchange = function (e) {
+					if (this.value === 0) {
+						var p = document.createElement("P")
+						var t = document.createTextNode("selecione um ano")
+					}
+					y = new Date().getFullYear()
+					a = this.value 
+					r = y-a
+
+					x = document.createElement("SPAN")
+					var t = document.createTextNode("você tem " + r);
+					x.appendChild(t);
+					document.body.appendChild(x);
+				}
 			}
 		}
 
@@ -57,8 +113,14 @@
 			}
 		}
 
-		
-
+		var endereco = 'https://economia.awesomeapi.com.br/all/USD-BRL';
+$.ajax({
+    url: endereco,
+    complete: function(res){
+        var meuJSON = JSON.parse(res.responseText);
+        console.log(meuJSON); 
+    }
+});
 	</script>
 </body>
 </html>
