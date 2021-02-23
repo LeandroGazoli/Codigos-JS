@@ -9,8 +9,9 @@
 
 	<select onchange="chamarFuncao(this)" id="opcoes">
 		<option value="0">Escolha uma opção</option>
-		<option id="1" name="1" value="1">Cº > Fº</option>
-		<option id="2" name="2" value="2">Ano</option>
+		<option id="1" value="1">Cº > Fº</option>
+		<option id="2" value="2">Ano</option>
+		<option id="3" value="3">valor 3</option>
 	</select>
 
 	<div class="container" id="conteudo">
@@ -96,7 +97,7 @@
 			}
 
 			if (values == '3') {
-				div.innerHTML '<h3> teste valor 3 </h3>'
+				div.innerHTML = '<h3> teste valor 3 </h3>'
 			}
 		}
 
