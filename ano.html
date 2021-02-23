@@ -21,6 +21,9 @@
 	<script>
 		var div = document.getElementById('conteudo')
 		div.innerHTML = '<p> Selecione uma opção </p>'	
+
+		zero = ''
+		um = ''
 		
 		function chamarFuncao (valor) {
 			var values = valor.value;  
@@ -67,17 +70,17 @@
 				selectList.className = "teste"
 				myParent.appendChild(selectList);
 				var o = document.createElement("option");
-				    o.value = 0;
-				    o.text = "selecione uma data";
-				    o.id = 0;
-				    selectList.appendChild(o);
+				o.value = 0;
+				o.text = "selecione uma data";
+				o.id = 0;
+				selectList.appendChild(o);
 				//Create and append the options
 				for (var i = 0; i < ano.length; i++) {
-				    var option = document.createElement("option");
-				    option.value = ano[i];
-				    option.text = ano[i];
-				    option.id = ano[i];
-				    selectList.appendChild(option);
+					var option = document.createElement("option");
+					option.value = ano[i];
+					option.text = ano[i];
+					option.id = ano[i];
+					selectList.appendChild(option);
 				}
 
 				document.getElementById("EscolherAno").onchange = function (e) {
@@ -97,9 +100,20 @@
 			}
 
 			if (values == '3') {
-				div.innerHTML = '<h3> teste valor 3 </h3>'
+
+				var gjson ;
+				gjson = getJSON('https://economia.awesomeapi.com.br/all/USD-BRL') ;
+				gparse = []
+				gparse = JSON.parse(gjson)
+				x = gparse.USD.ask
+				console.log(x)
+				document.getElementById("conteudo").innerText = x
+
+				div.innerHTML = '<h3>' + x + '</h3>'
+
 			}
 		}
+
 
 		function funcaoCal(tipo){
 			if (tipo === 'c') {
@@ -119,17 +133,26 @@
 			}
 		}
 
-
 		//json com api dolar hoje
-		var endereco = 'https://economia.awesomeapi.com.br/all/USD-BRL';
-		$.ajax({
-			url: endereco,
-			complete: function(res){
-				var meuJSON = JSON.parse(res.responseText);
-				console.log(meuJSON); 
-			}
-		});
 
+
+
+		function getJSON(url) {
+			var resp ;
+			var xmlHttp ;
+
+			resp  = '' ;
+			xmlHttp = new XMLHttpRequest();
+
+			if(xmlHttp != null)
+			{
+				xmlHttp.open( "GET", url, false );
+				xmlHttp.send( null );
+				resp = xmlHttp.responseText;
+			}
+
+			return resp ;
+		}
 
 	</script>
 </body>
