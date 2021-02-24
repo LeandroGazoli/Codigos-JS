@@ -249,14 +249,20 @@
 			var cidade
 			cidade = document.getElementById('cidade').value
 			cidadeLimpo = cidade.trim()
+			var myRequest = new Request('http://dataservice.accuweather.com/locations/v1/cities/search?apikey=CegMdY7N0I0vsM2YY1xYTbeJxClL4QYq&q='+cidadeLimpo+'&language=pt-br');
+
+			fetch(myRequest).then(function(response) {
+			var resposta = response.status // returns 200
+			console.log(response.status)
+			if (resposta === 200) {
 			gjson = getJSON('http://dataservice.accuweather.com/locations/v1/cities/search?apikey=CegMdY7N0I0vsM2YY1xYTbeJxClL4QYq&q='+cidadeLimpo+'&language=pt-br')
 
-			if (gjson) {
-				
-			}
-
 			gparse = JSON.parse(gjson)
-			const key = gparse[0].Key
+			
+			console.log(gjson)
+			if (gparse[0].key >= 1){
+			const key = gparse[0].Key}else{console.log(eval(gparse[0].key))}
+
 			hjson = getJSON('http://dataservice.accuweather.com/forecasts/v1/daily/1day/'+key+'?apikey=CegMdY7N0I0vsM2YY1xYTbeJxClL4QYq&language=pt-br&metric=true')
 			hparse = JSON.parse(hjson)
 			const data = hparse.DailyForecasts[0].Date
@@ -285,8 +291,6 @@
 
 			const exibirData = dia + '/' + mes + '/' + ano
 
-
-
 			var x = document.createElement("p");
 			x.innerHTML = exibirData
 			// document.body.appendChild(x);
@@ -296,6 +300,13 @@
 
 			div.innerHTML = '<div class="deletar" style="margin-top:10px;">'+ x.outerHTML + y.outerHTML + '</div>'
 		}
+			div.innerHTML += '<h4 style="display:block; margin-top:10px;"></h4>'
+		
+
+			})
+
+			
+	}
 
 	</script>
 </body>
