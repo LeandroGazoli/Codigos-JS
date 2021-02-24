@@ -135,6 +135,10 @@
 			}
 
 			if (values === '4') {
+				var x = document.createElement("INPUT");
+				x.setAttribute("type", "text");
+				x.setAttribute("value", "Hello World!");
+				document.body.appendChild(x);
 				div.innerHTML = '<input type="text" name="cidade" id="cidade" placeholder="Digite sua cidade">'
 				div.innerHTML += '<input type="button" onclick="previsaoDoTempo()" value="Buscar Cidade">'
 
@@ -240,6 +244,8 @@
 			const ano = d.getUTCFullYear()
 
 			const exibirData = dia + '/' + mes + '/' + ano
+
+			div.innerHTML += 
 
 			console.log(cidadeLimpo)
 			console.log(key)
