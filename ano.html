@@ -249,7 +249,10 @@
 			var cidade
 			cidade = document.getElementById('cidade').value
 			cidadeLimpo = cidade.trim()
-			var myRequest = new Request('http://dataservice.accuweather.com/locations/v1/cities/search?apikey=CegMdY7N0I0vsM2YY1xYTbeJxClL4QYq&q='+cidadeLimpo+'&language=pt-br');
+
+			try {
+				// throw new Error('Whoops!')
+				var myRequest = new Request('http://dataservice.accuweather.com/locations/v1/cities/search?apikey=CegMdY7N0I0vsM2YY1xYTbeJxClL4QYq&q='+cidadeLimpo+'&language=pt-br');
 
 			fetch(myRequest).then(function(response) {
 			var resposta = response.status // returns 200
@@ -260,8 +263,9 @@
 			gparse = JSON.parse(gjson)
 			
 			console.log(gjson)
-			if (gparse[0].key >= 1){
-			const key = gparse[0].Key}else{console.log(eval(gparse[0].key))}
+			console.log(resposta)
+
+			const key = gparse[0].Key
 
 			hjson = getJSON('http://dataservice.accuweather.com/forecasts/v1/daily/1day/'+key+'?apikey=CegMdY7N0I0vsM2YY1xYTbeJxClL4QYq&language=pt-br&metric=true')
 			hparse = JSON.parse(hjson)
@@ -304,6 +308,12 @@
 		
 
 			})
+			} catch (e) {
+				console.error(e.name + ': ' + e.message)
+			}
+
+
+			
 
 			
 	}
