@@ -20,39 +20,47 @@
 	</div>
 
 	<script>
-		var div = document.getElementById('conteudo')
-		div.innerHTML = '<p> Selecione uma opção </p>'	
-
-		zero = ''
-		um = ''
-		
-		function chamarFuncao (valor) {
-			var values = valor.value;  
 			var div = document.getElementById('conteudo')
 			div.innerHTML = '<p> Selecione uma opção </p>'	
+
+			/**********************************************************
+			Inicio funcao
+			***********************************************************/		
+			function chamarFuncao (valor) {
+				var values = valor.value;  
+				var div = document.getElementById('conteudo')
+				div.innerHTML = '<p> Selecione uma opção </p>'	
 
 			//Escolher uma opção
 			if (values == '0') {
 				div.innerHTML = '<p> Selecione uma opção </p>'
-				var x = document.getElementById("EscolherAno");
-				if(x) {
-					var obj = document.getElementById("EscolherAno");
-					obj.remove();
-				}
-			}
-			//calcular temperatura
-			if (values == '1') {
 				
+				var xy = document.getElementByClassName("deletar");
+				if(xy) {var obj = document.getElementByClassName("deletar");obj.remove();}
+			}
+
+			/**********************************************************
+			Calcular temperatura
+			***********************************************************/
+
+			if (values == '1') {
+				var xy = document.getElementByClassName("deletar");
+				if(xy) {var obj = document.getElementByClassName("deletar");obj.remove();}
+
 				div.innerHTML = '<h1> Calcular c para f </h1>'
 				div.innerHTML += '<input onkeyup="funcaoCal(\'c\')" id="c" type="number" name="c" placeholder="insirir valor de c" ><input onkeyup="funcaoCal(\'f\')" id="f" type="number" name="f" placeholder="insirir valor de f" >'
-				var x = document.getElementById("EscolherAno");
-				if(x) {
-					var obj = document.getElementById("EscolherAno");
-					obj.remove();
-				}
+				var xy = document.getElementById("deletar");
+
 			}
-			//calcular anos
+
+			/**********************************************************
+			Calcular Diferenças entre anos
+			***********************************************************/
+
 			if (values == '2') {
+				var xy = document.getElementByClassName("deletar");
+				if(xy) {var obj = document.getElementByClassName("deletar");obj.remove();}
+
 				div.innerHTML = '<h1> Calcular ano </h1>'
 				var myParent = document.body;
 
@@ -100,8 +108,14 @@
 				}
 			}
 
-			if (values == '3') {
+			/**********************************************************
+			Dolar Hoje
+			***********************************************************/
 
+			if (values == '3') {
+				var xy = document.getElementByClassName("deletar");
+				if(xy) {var obj = document.getElementByClassName("deletar");obj.remove();}
+				
 				var gjson
 				var gjsonbrl
 				gjsonbrl = getJSON('https://economia.awesomeapi.com.br/all/BRL-USD')
@@ -134,14 +148,35 @@
 				console.log(localStorage.getItem('mode'))
 			}
 
+			/**********************************************************
+			Previsao do Tempo
+			***********************************************************/
+
 			if (values === '4') {
+
+				var deletar = document.createElement("DIV");
+				deletar.setAttribute("class", "deletar");
+				
 				var x = document.createElement("INPUT");
 				x.setAttribute("type", "text");
-				x.setAttribute("value", "Hello World!");
-				document.body.appendChild(x);
-				div.innerHTML = '<input type="text" name="cidade" id="cidade" placeholder="Digite sua cidade">'
-				div.innerHTML += '<input type="button" onclick="previsaoDoTempo()" value="Buscar Cidade">'
+				x.setAttribute("id", "cidade");
+				
+				var y = document.createElement("INPUT");
+				y.setAttribute("type", "button");
+				y.setAttribute("value", "Buscar Cidade");
+				y.setAttribute("id", "botao");
 
+				div.innerHTML = '<div class="deletar" style="margin-top:10px;">'+ x.outerHTML + y.outerHTML + '</div>'
+
+				
+
+				document.getElementById("botao").addEventListener("click", previsaoDoTempo);
+				document.addEventListener('keypress', function(e){
+					if(e.which == 13){
+						previsaoDoTempo()
+					}
+				}, false);
+				
 				
 			}
 		}
@@ -215,6 +250,11 @@
 			cidade = document.getElementById('cidade').value
 			cidadeLimpo = cidade.trim()
 			gjson = getJSON('http://dataservice.accuweather.com/locations/v1/cities/search?apikey=CegMdY7N0I0vsM2YY1xYTbeJxClL4QYq&q='+cidadeLimpo+'&language=pt-br')
+
+			if (gjson) {
+				
+			}
+
 			gparse = JSON.parse(gjson)
 			const key = gparse[0].Key
 			hjson = getJSON('http://dataservice.accuweather.com/forecasts/v1/daily/1day/'+key+'?apikey=CegMdY7N0I0vsM2YY1xYTbeJxClL4QYq&language=pt-br&metric=true')
@@ -245,12 +285,16 @@
 
 			const exibirData = dia + '/' + mes + '/' + ano
 
-			div.innerHTML += 
 
-			console.log(cidadeLimpo)
-			console.log(key)
-			console.log(hparse)
-			console.log(exibirData)
+
+			var x = document.createElement("p");
+			x.innerHTML = exibirData
+			// document.body.appendChild(x);
+			var y = document.createElement("span");
+			y.innerHTML = cidadeLimpo
+			// document.body.appendChild(y);
+
+			div.innerHTML = '<div class="deletar" style="margin-top:10px;">'+ x.outerHTML + y.outerHTML + '</div>'
 		}
 
 	</script>
