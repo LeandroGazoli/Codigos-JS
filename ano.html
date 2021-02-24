@@ -12,6 +12,7 @@
 		<option id="1" value="1">Cº > Fº</option>
 		<option id="2" value="2">Ano</option>
 		<option id="3" value="3">valor 3</option>
+		<option id="4" value="4">Tempo</option>
 	</select>
 
 	<div class="container" id="conteudo">
@@ -114,12 +115,28 @@
 				console.log(x)
 				console.log(y)
 				console.log(gparsebrl)
+				div.innerHTML = '<h1 style="display: block; margin: 10px 0 0 0;"> Teste </h1>'
 				
-				div.innerHTML = '<input onkeyup="dolarhoje(\'r\')" type="number" name="r" id="r" placeholder="digite o dolar">'
-				div.innerHTML += '<input onkeyup="dolarhoje(\'d\')" type="number" id="d" placeholder="digite o real">'
+				div.innerHTML += '<input style="display: block; margin-top: 10px;" onkeyup="dolarhoje(\'r\')" type="number" name="r" id="r" placeholder="real">'
+				// div.innerHTML += '<br />'
+				div.innerHTML += '<input style="display: block; margin-top: 10px;" onkeyup="dolarhoje(\'d\')" type="number" id="d" placeholder="dolar">'
+				// div.innerHTML += '<br />'
 				div.innerHTML += '<input style="display:none;" type="number" name="m" id="m" value="'+ y +'" placeholder="digite o real">'
 				div.innerHTML += '<input style="display:none;" type="number" name="n" id="n" value="'+ x +'" placeholder="digite o real">'
 
+				var ss = document.createElement("link");
+				ss.type = "text/css";
+				ss.rel = "stylesheet";
+				ss.href = "mone.css";
+				document.getElementsByTagName("head")[0].appendChild(ss);
+
+				localStorage.setItem("mode", "dark");
+				console.log(localStorage.getItem('mode'))
+			}
+
+			if (values === '4') {
+				div.innerHTML = '<input type="text" name="cidade" id="cidade" placeholder="Digite sua cidade">'
+				
 			}
 		}
 
@@ -136,12 +153,12 @@
 				console.log(soma)
 			}
 			if(tipo === 'd') {
-				var real = eval(document.getElementById('d'))
-				var n = eval(document.getElementById('n'))
+				var real = eval(document.getElementById('d').value)
+				var n = eval(document.getElementById('n').value)
 				var rm = eval(real.value)
-				var soma = n*rm
-				console.log('soma ' + soma)
-				console.log(rm)
+				var soma = n*real
+				console.log('soma '+ soma)
+				console.log(real)
 				document.getElementById('r').value = soma
 			}
 		}
@@ -183,6 +200,18 @@
 			}
 
 			return resp ;
+		}
+
+
+		function previsaoDoTempo (cidade){
+			var gjson;
+			cidade = document.getElementById('cidade').value
+			cidadeLimpo = cidade.trim()
+			console.log(cidadeLimpo)
+			gjson = getJSON('api.openweathermap.org/data/2.5/weather?q='+ cidadeLimpo +'&appid=3afac56adb9f7d966b87c8d394072dc4')
+			gparse = []
+			gparse = JSON.parse(gjson)
+			return gparse
 		}
 
 	</script>
