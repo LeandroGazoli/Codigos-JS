@@ -216,18 +216,35 @@
 			hjson = getJSON('http://dataservice.accuweather.com/forecasts/v1/daily/1day/'+key+'?apikey=CegMdY7N0I0vsM2YY1xYTbeJxClL4QYq&language=pt-br&metric=true')
 			hparse = JSON.parse(hjson)
 			const data = hparse.DailyForecasts[0].Date
-			const avisoHoje = hparse.DailyForecasts[0].Day.IconPhrase
-			const PrecipitationType = hparse.DailyForecasts[0].Day.PrecipitationType
 
+			const IconPhraseNight = hparse.DailyForecasts[0].Night.IconPhrase
+			const PrecipitationTypeNight = hparse.DailyForecasts[0].Night.PrecipitationType
+			const PrecipitationIntensityNight = hparse.DailyForecasts[0].Night.PrecipitationIntensity
+
+			const IconPhraseDay = hparse.DailyForecasts[0].Day.IconPhrase
+			const PrecipitationTypeDay = hparse.DailyForecasts[0].Day.PrecipitationType
+			const PrecipitationIntensityDay = hparse.DailyForecasts[0].Day.PrecipitationIntensity
+
+			const Maximum = hparse.DailyForecasts[0].Temperature.Maximum.Value
+			const MaximumUnit = hparse.DailyForecasts[0].Temperature.Maximum.Unit
+
+			const Minimum = hparse.DailyForecasts[0].Temperature.Minimum.Value
+			const MinimumUnit = hparse.DailyForecasts[0].Temperature.Minimum.Unit
 
 			const previsao = hparse.Headline.Category
 			const aviso = hparse.Headline.Text
 
+			var d = new Date(data);
+			const dia = d.getUTCDate()
+			const mes = d.getUTCDay()
+			const ano = d.getUTCFullYear()
+
+			const exibirData = dia + '/' + mes + '/' + ano
 
 			console.log(cidadeLimpo)
 			console.log(key)
 			console.log(hparse)
-			console.log(previsao)
+			console.log(exibirData)
 		}
 
 	</script>
