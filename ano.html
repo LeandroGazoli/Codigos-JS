@@ -136,6 +136,8 @@
 
 			if (values === '4') {
 				div.innerHTML = '<input type="text" name="cidade" id="cidade" placeholder="Digite sua cidade">'
+				div.innerHTML += '<input type="button" onclick="previsaoDoTempo()" value="Buscar Cidade">'
+
 				
 			}
 		}
@@ -203,15 +205,29 @@
 		}
 
 
-		function previsaoDoTempo (cidade){
-			var gjson;
+		function previsaoDoTempo (){
+			var gjson
+			var cidade
 			cidade = document.getElementById('cidade').value
 			cidadeLimpo = cidade.trim()
-			console.log(cidadeLimpo)
-			gjson = getJSON('api.openweathermap.org/data/2.5/weather?q='+ cidadeLimpo +'&appid=3afac56adb9f7d966b87c8d394072dc4')
-			gparse = []
+			gjson = getJSON('http://dataservice.accuweather.com/locations/v1/cities/search?apikey=CegMdY7N0I0vsM2YY1xYTbeJxClL4QYq&q='+cidadeLimpo+'&language=pt-br')
 			gparse = JSON.parse(gjson)
-			return gparse
+			const key = gparse[0].Key
+			hjson = getJSON('http://dataservice.accuweather.com/forecasts/v1/daily/1day/'+key+'?apikey=CegMdY7N0I0vsM2YY1xYTbeJxClL4QYq&language=pt-br&metric=true')
+			hparse = JSON.parse(hjson)
+			const data = hparse.DailyForecasts[0].Date
+			const avisoHoje = hparse.DailyForecasts[0].Day.IconPhrase
+			const PrecipitationType = hparse.DailyForecasts[0].Day.PrecipitationType
+
+
+			const previsao = hparse.Headline.Category
+			const aviso = hparse.Headline.Text
+
+
+			console.log(cidadeLimpo)
+			console.log(key)
+			console.log(hparse)
+			console.log(previsao)
 		}
 
 	</script>
